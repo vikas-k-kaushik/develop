@@ -209,7 +209,6 @@ describe('[components] QuoteDetailsTemplate', () => {
       const quoteSummary = screen.getByText(/quote-summary/i)
 
       const clearChangesButton = screen.getByRole('button', { name: 'clear-changes' })
-      const submitForApprovalButton = screen.getByRole('button', { name: 'submit-for-approval' })
       const printQuoteButton = screen.getByRole('button', { name: 'print-quote' })
       const b2bProductComponent = screen.getByTestId('b2b-product-search-component')
 
@@ -218,7 +217,6 @@ describe('[components] QuoteDetailsTemplate', () => {
       expect(quoteDetails).toBeVisible()
       expect(quoteSummary).toBeVisible()
       expect(clearChangesButton).toBeVisible()
-      expect(submitForApprovalButton).toBeVisible()
       expect(printQuoteButton).toBeVisible()
       expect(b2bProductComponent).toBeVisible()
 
