@@ -208,7 +208,7 @@ const QuoteDetailsTemplate = (props: QuoteDetailsTemplateProps) => {
   const shouldFetchShippingMethods =
     quoteId && draft && shipItems?.length && selectedShippingAddressId
   const { updateQuoteFulfillmentInfo } = useUpdateQuoteFulfillmentInfo({
-    shouldFetchShippingMethods: !!shouldFetchShippingMethods,
+    shouldFetchShippingMethods: Boolean(shouldFetchShippingMethods),
   })
   const { openProductQuickViewModal, handleAddToQuote } = useProductCardActions(
     !!shouldFetchShippingMethods
@@ -615,7 +615,7 @@ const QuoteDetailsTemplate = (props: QuoteDetailsTemplateProps) => {
     }
   }
   const handleUpdateQuoteFulfillmentInfo = async () => {
-    if (shouldFetchShippingMethods) {
+    if (shouldFetchShippingMethods && mode) {
       const shippingMethodName = getQuoteShippingMethodName(
         shippingMethods,
         selectedShippingMethodCode
@@ -697,13 +697,12 @@ const QuoteDetailsTemplate = (props: QuoteDetailsTemplateProps) => {
             )}
             {mdScreen && (
               <BuyerQuoteActions
-                quote={quote}
-                quoteId={quoteId}
+                hasDraft={quote?.hasDraft as boolean}
                 mode={mode as string}
                 status={status}
                 isSubmitForApprovalEnabled={isSubmitForApprovalEnabled}
                 handleClearChanges={handleClearChanges}
-                handleEditQuote={handleEditQuote}
+                handleEditQuote={() => handleEditQuote(quoteId)}
                 handleSubmitForApproval={handleSubmitForApproval}
                 handleGotoCheckout={handleGotoCheckout}
                 handlePrint={handlePrint}
@@ -1245,13 +1244,12 @@ const QuoteDetailsTemplate = (props: QuoteDetailsTemplateProps) => {
             </Box>
             {!mdScreen && (
               <BuyerQuoteActions
-                quote={quote}
-                quoteId={quoteId}
+                hasDraft={quote?.hasDraft as boolean}
                 mode={mode as string}
                 status={status}
                 isSubmitForApprovalEnabled={isSubmitForApprovalEnabled}
                 handleClearChanges={handleClearChanges}
-                handleEditQuote={handleEditQuote}
+                handleEditQuote={() => handleEditQuote(quoteId)}
                 handleSubmitForApproval={handleSubmitForApproval}
                 handleGotoCheckout={handleGotoCheckout}
                 handlePrint={handlePrint}
